@@ -10,7 +10,10 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      smurfs: []
+      smurfs: [],
+      name: '',
+      age: '',
+      height: ''
     };
   }
 
@@ -24,27 +27,76 @@ class App extends Component {
       )
       .catch(err => console.log(err));
   }
-  // add any needed code to ensure that the smurfs collection exists on state and it has data coming from the server
-  // Notice what your map function is looping over and returning inside of Smurfs.
-  // You'll need to make sure you have the right properties on state and pass them down to props.
+
+  addSmurf = event => {
+    event.preventDefault();
+    // add code to create the smurf using the api
+    axios
+      .post('http://localhost:3333/smurfs', {
+        name: this.state.name,
+        age: this.state.age,
+        height: this.state.height
+      })
+      .then(res => {
+        this.setState({
+          smurfs: res.data,
+          name: '',
+          age: '',
+          height: ''
+        });
+      })
+      .catch(err =>
+        alert(
+          `${err} \nInputs do not match required information or smurf already exists.`
+        )
+      );
+  };
+
+  handleDelete = id => {
+    axios
+      .delete(`http://localhost:3333/smurfs/${id}`)
+      .then(res => this.setState({ smurfs: res.data }))
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  handleInputChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   render() {
     return (
       <div className="App">
         <nav>
-          <div>
-            <NavLink to="/">Village</NavLink>
-          </div>
-          <div>
-            <NavLink to="/smurf-form">Add Smurf</NavLink>
-          </div>
+          <NavLink to="/">Village</NavLink>
+          <NavLink to="/smurf-form">Add Smurf</NavLink>
         </nav>
 
         <Route
           exact
           path="/"
-          render={props => <Smurfs {...props} smurfs={this.state.smurfs} />}
+          render={props => (
+            <Smurfs
+              {...props}
+              smurfs={this.state.smurfs}
+              handleDelete={this.handleDelete}
+            />
+          )}
         />
-        <Route path="/smurf-form" component={SmurfForm} />
+        <Route
+          path="/smurf-form"
+          render={props => (
+            <SmurfForm
+              {...props}
+              name={this.state.name}
+              age={this.state.age}
+              height={this.state.height}
+              addSmurf={this.addSmurf}
+              handleInputChange={this.handleInputChange}
+            />
+          )}
+        />
       </div>
     );
   }

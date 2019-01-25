@@ -41,3 +41,9 @@ ul {
 .SmurfForm input {
   margin: 0 10px;
 }
+
+button {
+  padding: 5px 25px;
+  margin: 10px 0;
+  background: transparent;
+}
