@@ -18,16 +18,12 @@ class SmurfForm extends Component {
       .post('http://localhost:3333/smurfs', {
         name: this.state.name,
         age: this.state.age,
-        email: this.state.email
+        height: this.state.height
       })
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res.data);
+      })
       .catch(err => console.log(err));
-
-    this.setState({
-      name: '',
-      age: '',
-      height: ''
-    });
   };
 
   handleInputChange = e => {
@@ -35,7 +31,6 @@ class SmurfForm extends Component {
   };
 
   render() {
-    console.log(this.state.name);
     return (
       <div className="SmurfForm">
         <form onSubmit={this.addSmurf}>
