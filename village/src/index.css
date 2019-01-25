@@ -3,24 +3,3 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
-
-nav {
-  height: 50px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-a {
-  margin: 0 30px;
-  text-decoration: none;
-  color: black;
-}
-
-a:hover {
-  color: teal;
-}
-
-.active {
-  color: teal;
-}

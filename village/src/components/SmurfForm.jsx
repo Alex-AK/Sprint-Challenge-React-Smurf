@@ -22,6 +22,11 @@ class SmurfForm extends Component {
       })
       .then(res => {
         console.log(res.data);
+        this.setState({
+          name: '',
+          age: '',
+          height: ''
+        });
       })
       .catch(err => console.log(err));
   };

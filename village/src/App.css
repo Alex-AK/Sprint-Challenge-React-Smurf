@@ -1,15 +1,43 @@
 .App {
   text-align: center;
 }
+nav {
+  height: 50px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+a {
+  margin: 0 30px;
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: teal;
+}
+
+.active {
+  color: teal;
+}
 
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
+.flex {
+  display: flex;
+  justify-content: center;
+}
 
 .card {
   border: 1px solid grey;
   width: 300px;
-  margin: auto;
+  margin: 10px 0;
+}
+
+.SmurfForm input {
+  margin: 0 10px;
 }
